@@ -3,7 +3,7 @@ import Login from './components/login';
 import Home from './components/home';
 import Counter from './components/counter';
 import Users from './components/users';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import PageNotFound from './components/pagenotfound';
 
 function App() {
@@ -11,7 +11,8 @@ function App() {
     <>
       <Nav />
       <Routes>
-        <Route path="/home" element={<Home />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/home" element={<Navigate to="/" />} />
         <Route path="/login" element={<Login />} />
         <Route path="/users" element={<Users />} />
         <Route path="*" element={<PageNotFound />} />

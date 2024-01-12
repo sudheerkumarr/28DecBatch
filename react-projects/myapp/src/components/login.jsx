@@ -2,7 +2,7 @@
 const Login = () => {
     return (
         <div className="w-25 mx-auto mt-5 shadow p-3 mb-5 bg-body-tertiary rounded my-auto">
-            <p className="h4 text-white bg-secondary p-2 text-center">Login</p>
+            < p className="h4 text-white bg-secondary p-2 text-center" > Login</p >
             <form className=" border border-secondary p-3 ">
                 <div className="mb-3">
                     <label htmlFor="email" className="form-label">Email</label>
@@ -24,7 +24,7 @@ const Login = () => {
                     <input type="submit" className="btn btn-secondary" />
                 </div>
             </form>
-        </div>
+        </div >
 
     )
 }

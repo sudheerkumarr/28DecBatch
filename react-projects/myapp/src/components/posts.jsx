@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const Posts = () => {
     const [posts, setPosts] = useState([]);
@@ -29,9 +30,10 @@ const Posts = () => {
             .catch((err) => console.log(err))
     }
     return (
-        <>
+        <div className='w-75 mx-auto'>
             <h1>Posts component</h1>
-            <table className='table table-striped w-75 mx-auto'>
+            <Link to="/posts/add" className='btn btn-primary float-end'>Add Post</Link>
+            <table className='table table-striped '>
                 <thead>
                     <tr>
                         <th>Post Id</th>
@@ -50,7 +52,7 @@ const Posts = () => {
                                 <td>{p.title}</td>
                                 <td>{p.body}</td>
                                 <td>
-                                    <i className="bi bi-pencil-fill me-3" ></i>
+                                    <Link to={`/posts/update/${p.id}`} ><i className="bi bi-pencil-fill me-3"></i></Link>
                                     <i className="bi bi-trash3" onClick={() => handleDelete(p.id)}></i>
                                 </td>
                             </tr>
@@ -59,7 +61,7 @@ const Posts = () => {
                 </tbody>
 
             </table >
-        </>
+        </div >
     );
 }
 

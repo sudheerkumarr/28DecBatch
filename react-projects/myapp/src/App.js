@@ -6,7 +6,7 @@ import Users from './components/users';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import Posts from './components/posts';
 import AddPost from './components/addpost';
-
+import UpdatePost from './components/updatepost';
 import PageNotFound from './components/pagenotfound';
 
 function App() {
@@ -21,6 +21,7 @@ function App() {
         <Route path="/counter" element={<Counter />} />
         <Route path="/posts" element={<Posts />} />
         <Route path="/posts/add" element={<AddPost />} />
+        <Route path="/posts/update/:id" element={<UpdatePost />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes >
     </>

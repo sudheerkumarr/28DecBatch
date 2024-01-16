@@ -1,18 +1,28 @@
-import { useState } from 'react';
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { useParams } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-const AddPost = () => {
-    // initial state of the component
+
+const UpdatePost = () => {
     const [post, setPost] = useState(
-        {
-            id: 0,
-            userId: 0,
-            title: "",
-            body: ""
-        }
-    );
+        {}
+    )
+
+    // Get post id from url
+    const params = useParams();
 
     const navigate = useNavigate();
+
+    // get post data by using id at the time of page loading
+    useEffect(() => {
+        console.log(params)
+        axios.get(`https://jsonplaceholder.typicode.com/posts/${params.id}`)
+            .then(res => {
+                console.log(res);
+                setPost(res.data);
+            })
+            .catch(err => console.log(err))
+    }, [])
 
     const handleChange = (event) => {
         console.log(event)
@@ -34,24 +44,25 @@ const AddPost = () => {
 
         // logic to send form data to backend using axios
         //axios.post(url, data)
-        axios.post("https://jsonplaceholder.typicode.com/posts", post)
+        axios.put(`https://jsonplaceholder.typicode.com/posts/${params.id}`, post)
             .then(res => {
                 console.log(res)
-                window.alert("Added new post successfully!")
+                window.alert("Update post successfully!")
                 navigate("/posts");
             })
             .catch(err => console.log(err))
 
     }
 
+
+
     return (
-        <div className="w-50 mx-auto border p-3 mt-5">
-            < h3 > Add Post</h3 >
-            <hr />
+        <div className="w-50 mx-auto mt-5 border p-3">
+            <h3>Update Post</h3>
             <form onSubmit={handleSubmit}>
                 <div className="mb-3">
                     <label className="form-label" htmlFor="postId">Post Id</label>
-                    <input value={post.id} name="id" onChange={handleChange} className="form-control" id="postId" type="number" />
+                    <input value={post.id} disabled name="id" onChange={handleChange} className="form-control" id="postId" type="number" />
                 </div>
                 <div className="mb-3">
                     <label className="form-label" htmlFor="userId">User Id</label>
@@ -67,8 +78,8 @@ const AddPost = () => {
                 </div>
                 <input type="submit" className="btn btn-secondary" />
             </form >
-        </div >
+        </div>
     );
 }
 
-export default AddPost;
+export default UpdatePost;

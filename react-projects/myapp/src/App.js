@@ -4,6 +4,9 @@ import Home from './components/home';
 import Counter from './components/counter';
 import Users from './components/users';
 import { Routes, Route, Navigate } from 'react-router-dom';
+import Posts from './components/posts';
+import AddPost from './components/addpost';
+
 import PageNotFound from './components/pagenotfound';
 
 function App() {
@@ -16,8 +19,10 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/users" element={<Users />} />
         <Route path="/counter" element={<Counter />} />
+        <Route path="/posts" element={<Posts />} />
+        <Route path="/posts/add" element={<AddPost />} />
         <Route path="*" element={<PageNotFound />} />
-      </Routes>
+      </Routes >
     </>
   );
 }

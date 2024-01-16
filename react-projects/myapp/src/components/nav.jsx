@@ -27,6 +27,9 @@ export function Nav() {
                             <li className="nav-item">
                                 <a className="nav-link">Products</a>
                             </li>
+                            <li className="nav-item">
+                                <NavLink to="/posts" className="nav-link">Posts</NavLink>
+                            </li>
                         </ul>
                         <form className="d-flex" role="search">
                             <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />

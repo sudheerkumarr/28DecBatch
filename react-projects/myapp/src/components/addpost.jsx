@@ -32,6 +32,8 @@ const AddPost = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
 
+        // Validation
+
         // logic to send form data to backend using axios
         //axios.post(url, data)
         axios.post("https://jsonplaceholder.typicode.com/posts", post)

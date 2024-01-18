@@ -1,15 +1,15 @@
 // increment action
 
-function incrementAction() {
+export const incrementAction = () => {
     return {
-        name: 'INCREMENT',
+        type: 'INCREMENT',
         payload: 1
     }
 }
 // decrement action
-const decrementAction = () => {
+export const decrementAction = () => {
     return {
-        name: 'DECREMENT',
+        type: 'DECREMENT',
         payload: 1
     }
 }

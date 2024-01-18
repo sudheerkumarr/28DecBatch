@@ -1,20 +1,14 @@
 //sfc
 // React hook methods - useState() - define state in functional component
 import { useState } from "react";
-import Count from "./count";
-import { useSelector, useDispatch } from 'react-redux';
+
 const Counter = () => {
     // define initial state in functional component
-    //const [count, setCount] = useState(0);
-
-    // get count value from store
-    const count = useSelector((state) => state.count);
+    const [count, setCount] = useState(0);
 
     // increment function
     const increment = () => {
-        //setCount(count + 1);
-
-        // dispatch increment action when use clicks 'incr' btn
+        setCount(count + 1);
     }
     // decrement function
     const decrement = () => {
@@ -23,7 +17,11 @@ const Counter = () => {
     return (
         <div>
             <h1>Counter Component</h1>
-            <Count count={count} increment={increment} decrement={decrement} />
+            <div className="d-flex">
+                <button className="btn btn-primary" onClick={decrement}>Decrement</button>
+                <p className="mx-2">{count}</p>
+                <button className="btn btn-secondary" onClick={increment}>Increment</button>
+            </div>
         </div>
     )
 }

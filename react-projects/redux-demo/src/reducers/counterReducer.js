@@ -1,7 +1,7 @@
-let intialState = 0;
+//let intialState = 0;
 
-const CounterReducer = (state = intialState, action) => {
-    switch (action.name) {
+const CounterReducer = (state = 0, action) => {
+    switch (action.type) {
         case 'INCREMENT':
             return state + action.payload;
         case 'DECREMENT':
@@ -10,3 +10,4 @@ const CounterReducer = (state = intialState, action) => {
             return state;
     }
 }
+export default CounterReducer;

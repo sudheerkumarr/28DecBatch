@@ -1,18 +1,28 @@
 //sfc
 // React hook methods - useState() - define state in functional component
-import { useState } from "react";
+
+
+import { useSelector, useDispatch } from 'react-redux';
+import { incrementAction, decrementAction } from '../actions/counterActions';
 
 const Counter = () => {
     // define initial state in functional component
-    const [count, setCount] = useState(0);
+    //const [count, setCount] = useState(0);
+
+    const dispatch = useDispatch();
+
+    // get count value from store
+    const count = useSelector((state) => state.count);
 
     // increment function
     const increment = () => {
-        setCount(count + 1);
+        // dispatch increment action when use clicks 'incr' btn
+        dispatch(incrementAction());
     }
     // decrement function
     const decrement = () => {
-        setCount(count - 1);
+        // dispatch decrement action
+        dispatch(decrementAction());
     }
     return (
         <div>

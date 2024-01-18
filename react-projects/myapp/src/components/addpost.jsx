@@ -12,6 +12,8 @@ const AddPost = () => {
         }
     );
 
+    const [errors, setErrors] = useState({});
+
     const navigate = useNavigate();
 
     const handleChange = (event) => {
@@ -33,6 +35,11 @@ const AddPost = () => {
         event.preventDefault();
 
         // Validation
+        if ((post.title.length < 3) || (post.title.length > 30)) {
+            let errs = { ...errors };
+            errs['title'] = "title length should be greater than 3"
+        }
+
 
         // logic to send form data to backend using axios
         //axios.post(url, data)

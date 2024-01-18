@@ -1,18 +1,26 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import PostService from '../services/postsService';
 
 const Posts = () => {
     const [posts, setPosts] = useState([]);
     //useEffect(()=>function, [condition]);
     useEffect(() => {
         //axios.get(url)
-        axios.get("https://jsonplaceholder.typicode.com/posts")
-            .then(response => {
-                console.log(response);
-                setPosts(response.data)
+        // axios.get("https://jsonplaceholder.typicode.com/posts")
+        //     .then(response => {
+        //         console.log(response);
+        //         setPosts(response.data)
+        //     })
+        //     .catch(err => console.log(err))
+
+        PostService.getAllPosts()
+            .then(res => {
+                console.log(res);
+                setPosts(res.data)
             })
-            .catch(err => console.log(err))
+            .catch();
     }, []);
 
     // Delete

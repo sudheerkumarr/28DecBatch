@@ -1,8 +1,8 @@
 import { useState } from "react";
 import Joi from 'joi-browser';
-
-
+import { useNavigate } from "react-router-dom";
 import axios from 'axios';
+
 // ctrl+d
 const Login = () => {
     const [user, setUser] = useState(
@@ -14,11 +14,14 @@ const Login = () => {
     )
 
     const [errors, setErrors] = useState({});
+    const [errRes, setErrRes] = useState(null);
+
+    const navigate = useNavigate();
 
     // Step2: Define schema to validate user/form data
     const schema = Joi.object({
         email: Joi.string()
-            .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } })
+            .email({ minDomainSegments: 2, tlds: { allow: ['com', 'in'] } })
             .required(),
         password: Joi.string()
             .regex(new RegExp('^[a-zA-Z0-9]{3,30}$'))
@@ -29,12 +32,13 @@ const Login = () => {
     // Step3: function to validate user/form data w.r.t schema
     const validate = () => {
         const errors = {}; //object type local variable
+        console.log("###User", user)
         const result = Joi.validate(user, schema, {
             abortEarly: false,
         });
         console.log(result);
         // setting error messages to error properties
-        // ex: errors[username] = "username is required";
+        // ex: errors[email] = "email is required";
         // ex: errors[password] = "password is required";
         if (result.error != null)
             for (let item of result.error.details) {
@@ -58,27 +62,36 @@ const Login = () => {
         if (errors) return;
         // logic to send form data to backend for validation
         //axios.post(url, data)
+
         axios.post("https://reqres.in/api/login", user)
-            .then(res => console.log(res))
-            .catch(err => console.log(err))
+            .then(res => {
+                console.log(res);
+
+                navigate("/posts");
+            }
+            )
+            .catch(err => {
+                console.log(err);
+                setErrRes(err);
+            }
+            )
     }
 
     return (
-        <>
-            {console.log(user)}
-            {console.log(errors)}
-            <div className="w-25 mx-auto mt-5 shadow p-3 mb-5 bg-body-tertiary rounded my-auto">
-                < p className="h4 text-white bg-secondary p-2 text-center" > Login</p >
+        <div className="w-25 mx-auto mt-5">
+            {errRes && <div className="alert alert-danger" role="alert">{errRes.response.data.error}</div>}
+            <div className=" shadow p-3 mb-5 bg-body-tertiary rounded my-auto">               < p className="h4 text-white bg-secondary p-2 text-center" > Login</p >
+
                 <form onSubmit={handleSubmit} className=" border border-secondary p-3 ">
                     <div className="mb-3">
                         <label htmlFor="email" className="form-label">Email</label>
                         <input name="email" value={user.email} onChange={handleChange} id="email" type="email" className="form-control" />
-                        {errors.email && <small className="text-danger">{errors.email}</small>}
+                        {errors && <small className="text-danger">{errors.email}</small>}
                     </div>
                     <div className="mb-3">
                         <label htmlFor="password" className="form-label">Password</label>
                         <input name="password" value={user.password} onChange={handleChange} id="password" type="password" className="form-control" />
-                        {errors.password && <small className="text-danger">{errors.password}</small>}
+                        {errors && <small className="text-danger">{errors.password}</small>}
                     </div>
                     <div className="mb-3">
                         <label className="form-label">Role</label>
@@ -87,14 +100,14 @@ const Login = () => {
                             <option selected>Customer</option>
                             <option>Employee</option>
                         </select>
-                        {errors.role && <small className="text-danger">{errors.role}</small>}
+                        {errors && <small className="text-danger">{errors.role}</small>}
                     </div>
                     <div className="d-grid gap-2">
                         <input type="submit" className="btn btn-secondary" />
                     </div>
                 </form>
             </div >
-        </>
+        </div>
     )
 }
 

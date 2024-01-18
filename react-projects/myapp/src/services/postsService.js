@@ -8,7 +8,7 @@ class PostService {
     async getAllPosts() {
         //https://jsonplaceholder.typicode.com/posts
         const res = await axios.get(this.baseUrl + "/posts");
-        // promise obj - state - pending, suceess, reject
+        // async functions return promise obj - state - pending, suceess, reject
         // to get data from promise object use then() or catch() methods
         return res;
     }

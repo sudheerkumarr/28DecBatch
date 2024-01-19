@@ -18,8 +18,8 @@ class Counter extends Component {
     decrement = () => {
         // decrement counter value by 1
         //this.setState({ count: this.state.count - 1 });
-        if ((this.state.count - parseInt(this.state.stepValue)) >= 0)
-            this.setState({ count: this.state.count - parseInt(this.state.stepValue) });
+
+        this.setState({ count: this.state.count - parseInt(this.state.stepValue) });
     };
     handleChange = (event) => {
         this.setState({ stepValue: event.target.value });

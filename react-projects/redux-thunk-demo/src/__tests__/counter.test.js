@@ -32,6 +32,7 @@ describe("Counter component test suite", () => {
     }); // 3rd test end
 
 
+    // increment
     test("verify counter value is incremented by clicking on increment button", () => {
         // loading component into virtual dom
         render(<Counter />);
@@ -47,6 +48,59 @@ describe("Counter component test suite", () => {
         fireEvent.click(incrBtnElem);
         expect(countElem.textContent).toBe("2");
     }); // 4th test end
+    test("verify initial value in the text field is 1", () => {
+        // loading component into virtual dom
+        render(<Counter />);
+        // Getting element from virutal dom
+        const inputNumElem = screen.getByLabelText("Enter step value");
+        // Verify button text
+        expect(inputNumElem.value).toBe("1");
+    }); // 6th test end
 
+    // decrement
+
+    // getByLabelText()
+    test("verify initial value in the text field is 1", () => {
+        // loading component into virtual dom
+        render(<Counter />);
+        // Getting element from virutal dom
+        const inputNumElem = screen.getByLabelText("Enter step value");
+        // Verify button text
+        expect(inputNumElem.value).toBe("1");
+    }); // 6th test end
+
+    test("verify value in the text field can be changed ", () => {
+        // loading component into virtual dom
+        render(<Counter />);
+        // Getting element from virutal dom
+        const inputNumElem = screen.getByLabelText("Enter step value");
+        fireEvent.change(inputNumElem, {
+            target: {
+                value: 10,
+            },
+        });
+        expect(inputNumElem.value).toBe("10");
+    }); // 7th Test case
+
+    test("Should be able to increment or decrement counter value by step value given by user", () => {
+        // loading component into virtual dom
+        render(<Counter />);
+        // Getting element from virutal dom
+        const inputNumElem = screen.getByLabelText("Enter step value");
+        const countElem = screen.getByTestId("counter");
+        fireEvent.change(inputNumElem, {
+            target: {
+                value: 10,
+            },
+        });
+        // Get increment & decrement buttons
+        const incrBtnElem = screen.getByRole("button", { name: "Increment" });
+        const decrBtnElem = screen.getByRole("button", { name: "Decrement" });
+
+        fireEvent.click(decrBtnElem);
+        expect(countElem.textContent).toBe("-10");
+        fireEvent.click(incrBtnElem);
+        expect(countElem.textContent).toBe("0");
+    }); // 8th test case
 
 })

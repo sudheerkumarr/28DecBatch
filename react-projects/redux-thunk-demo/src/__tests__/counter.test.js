@@ -30,4 +30,23 @@ describe("Counter component test suite", () => {
         // Verify button text
         expect(decrBtnElem.textContent).toBe("Decrement");
     }); // 3rd test end
+
+
+    test("verify counter value is incremented by clicking on increment button", () => {
+        // loading component into virtual dom
+        render(<Counter />);
+
+        // Getting element from virutal dom
+        const incrBtnElem = screen.getByRole("button", { name: "Increment" });
+        const countElem = screen.getByTestId("counter");
+
+        expect(countElem.textContent).toBe("0");
+        // click on incr button
+        fireEvent.click(incrBtnElem);
+        expect(countElem.textContent).toBe("1");
+        fireEvent.click(incrBtnElem);
+        expect(countElem.textContent).toBe("2");
+    }); // 4th test end
+
+
 })

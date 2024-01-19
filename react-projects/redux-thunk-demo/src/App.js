@@ -1,10 +1,9 @@
-import Posts from "./components/posts";
-import Test from "./components/test";
+import Counter from "./components/counter";
+import 'bootstrap/dist/css/bootstrap.min.css';
 function App() {
   return (
     <div className="App">
-      <Posts />
-      <Test />
+      <Counter />
     </div>
   );
 }
